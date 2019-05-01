@@ -1,4 +1,4 @@
-<h2>Questions</h2>
+<h2>Suketail</h2>
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped">
@@ -20,6 +20,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @questions %>
     <div>
       <%= link_to 'New question', new_question_path %>
     </div>

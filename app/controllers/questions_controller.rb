@@ -1,8 +1,12 @@
 class QuestionsController < ApplicationController
   #指定したactionの前に行う処理を指定する
   before_action :set_question ,only: [:edit, :update, :show, :destroy]
+  
+  PER = 10
+
   def index
-    @questions = Question.all
+    # 更新が新しい順に並べる
+    @questions = Question.page(params[:page]).per(PER).order('updated_at DESC')
   end
 
   def show
