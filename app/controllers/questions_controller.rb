@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
+  #指定したactionの前に行う処理を指定する
+  before_action :set_question ,only: [:edit, :update, :show, :destroy]
   def index
     @questions = Question.all
   end
 
   def show
-    @question = Question.find(params[:id])
     @answer = Answer.new
 
   end
@@ -24,11 +25,9 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find(params[:id])
   end
 
   def update
-    @question = Question.find(params[:id])
     if @question.update(question_params)
       redirect_to root_path, notice: 'Success!'
     else
@@ -38,12 +37,16 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy
     redirect_to root_path, notice: 'Success!'
   end
 
   private
+
+    def set_question
+    @question = Question.find(params[:id])
+    end
+
     def question_params
       params.require(:question).permit(:name, :title, :content)
     end
