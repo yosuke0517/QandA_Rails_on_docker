@@ -7,9 +7,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/shim' %>
   </head>
-
   <body>
+    <%= render 'layouts/header' %>
     <div class="container">
       <% if flash[:notice] %>
         <p class="text-success"><%= flash[:notice] %></p>
@@ -17,7 +18,10 @@
       <% if flash[:alert] %>
         <p class="text-danger"><%= flash[:alert] %></p>
       <% end %>
-      <%= yield %>
+      <div class="p-home px-2 px-1@s pt-4 pt-1@s">
+        <%= yield %>
+      </div>
     </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
