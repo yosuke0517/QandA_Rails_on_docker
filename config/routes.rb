@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  get 'answers/edit'
-  # get 'questions/index'
-  # get 'questions/show'
-  # get 'questions/new'
-  # get 'questions/edit'
   root 'questions#index'
+  get 'signup', to: 'users#new'
+  post 'signup', to: 'users#create'
+  get 'answers/edit'
   resources :questions do
     resources :answers
   end
+  resources :users, only: [:index, :show, :create]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

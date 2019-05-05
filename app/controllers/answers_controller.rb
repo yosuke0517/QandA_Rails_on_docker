@@ -4,9 +4,11 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = Answer.new
       if @answer.update(answer_params)
-        redirect_to question_path(@question), notice: 'Success!'
+        flash[:success] = '回答を投稿しました。'
+        redirect_to question_path(@question)
       else
-        redirect_to question_path(@question), alert: 'Invalid!'
+        flash[:danger] = '回答の投稿に失敗しました。'
+        redirect_to question_path(@question)
       end
   end
   
@@ -19,9 +21,10 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     if @answer.update(answer_params)
-      redirect_to question_path(@question), notice: 'Success!'
+      flash[:success] = '回答の編集をしました。'
+      redirect_to question_path(@question)
     else
-      flash[:alert] = 'Invalid!'
+      flash[:danger] = '回答の編集に失敗しました。'
       render :edit
     end
   end
@@ -30,7 +33,8 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     @answer.destroy
-    redirect_to question_path(@question), notice: 'Deleted!'
+    flash[:info] = '回答を削除しました。'
+    redirect_to question_path(@question)
   end
 
   private
