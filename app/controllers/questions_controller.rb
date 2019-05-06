@@ -1,8 +1,8 @@
 class QuestionsController < ApplicationController
   #指定したactionの前に行う処理を指定する
   before_action :set_question ,only: [:edit, :update, :show, :destroy]
-  
-  PER = 10
+  before_action :login_requered ,only: [:edit, :update, :destroy, :new]
+  PER = 7
 
   def index
     # 更新が新しい順に並べる
@@ -56,5 +56,10 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:name, :title, :content)
+    end
+
+    def login_requered
+      flash[:info] = 'ログインまたはサインアップをしてください。'
+      redirect_to login_path unless current_user
     end
 end
