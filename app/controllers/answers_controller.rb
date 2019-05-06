@@ -45,7 +45,7 @@ class AnswersController < ApplicationController
     end
 
     def login_requered
-      flash[:info] = 'ログインまたはサインアップをしてください。'
+      # flash[:info] = 'ログインまたはサインアップをしてください。'
       redirect_to login_path unless current_user
     end
 end
