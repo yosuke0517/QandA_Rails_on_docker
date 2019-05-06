@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_action :login_requered ,only: [:edit, :update, :destroy, :new]
+
 
   def create
     @question = Question.find(params[:question_id])
@@ -40,5 +42,10 @@ class AnswersController < ApplicationController
   private
     def answer_params
     params.require(:answer).permit(:content, :name, :question_id)
+    end
+
+    def login_requered
+      flash[:info] = 'ログインまたはサインアップをしてください。'
+      redirect_to login_path unless current_user
     end
 end

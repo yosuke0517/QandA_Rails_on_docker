@@ -1,0 +1,16 @@
+div
+  h2
+    | Update answers
+  - # @questionに紐づくanswerを編集したいので配列でmodelをもつ
+  = form_with model:[@question, @answer], local: true do |f|
+    .form-group
+      .form-group
+        label
+          | Name
+        = f.text_field :name, class: "form-control"
+      .form-group
+        label
+          | Content
+        = f.text_area :content, class: "form-control"
+      .text-center
+        = f.submit "Update", class: "btn btn-primary"
