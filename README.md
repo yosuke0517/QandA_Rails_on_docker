@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 単純なQ&Aサービス風ポートフォリオ。「 ○ 」について実装済。「 - 」については順次実装予定。
+### 開発環境
+- docker
+  - Ruby 2.6.1
+  - rails 5.2.3
+  - mysql 5.7
+### 機能
+○ 質問のCURD機能（一覧、新規作成、編集、削除）
+○ 回答のCRUD機能（新規作成、編集、削除）
+○ 記事一覧のページネーション（kaminari）
+○ ログイン・ログアウト
+○ ログイン状況に応じた表示切替
+- 画像のアップロード機能（Shrine）
+- CKEditorによる記事の編集機能
+- 記事の検索機能（ransack）
+- 記事へのいいね機能（別ユーザーのみ）
+- 記事のストック機能（自身の記事も可）
+- 別ユーザーのフォロー機能
+- エラーメッセージ日本語化
+- Googleアナリティクスの導入
+- 通知機能（メール配信）
+- トレンド機能（バッチ処理）
+- Twitterとの連携：１（記事を引用ツイート出来る）
+- Twitterとの連携：２（いいね数が一定を超えたら、公式垢が記事をツイート）
+- ソーシャルログイン（Twitter、Facebook、Google）
+- テストアカウントのリセット（バッチ処理）
+- 画像をCDNで配信
+- Docker/CircleCIでCI/CDパイプラインを構築
+- フロントをリッチにしたい（Vue.js）
+- (開発)テスト実装(RSpec(単体テスト・統合テスト))
