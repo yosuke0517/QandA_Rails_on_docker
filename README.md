@@ -6,7 +6,7 @@
   - Ruby 2.6.1
   - rails 5.2.3
   - mysql 5.7
-  - dockerでの開発環境をテンプレート化https://qiita.com/sukezane/items/ad97e24c450e117f8eaf
+  - dockerでの開発環境をテンプレート化：https://qiita.com/sukezane/items/ad97e24c450e117f8eaf
 ### 機能
 - ○ 質問のCURD機能（一覧、新規作成、編集、削除）
 - ○ 回答のCRUD機能（新規作成、編集、削除）
