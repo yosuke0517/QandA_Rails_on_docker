@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
 
   def index
     # 更新が新しい順に並べる
-    @questions = Question.page(params[:page]).per(PER).order('updated_at DESC')
+    @questions = Question.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
   end
 
   def show
