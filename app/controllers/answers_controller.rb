@@ -1,22 +1,22 @@
 class AnswersController < ApplicationController
-  before_action :login_requered ,only: [:edit, :update, :destroy, :new]
+  before_action :login_requered ,only: [:edit, :update, :destroy]
 
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = Answer.new
-      if @answer.update(answer_params)
-        flash[:success] = '回答を投稿しました。'
-        redirect_to question_path(@question)
-      else
-        flash[:danger] = '回答の投稿に失敗しました。'
-        redirect_to question_path(@question)
-      end
+    @answer = Answer.new(answer_params)
+
+    if @answer.save
+      flash[:success] = '回答を投稿しました。'
+    else
+      flash[:danger] = '回答の投稿に失敗しました。'
+    end
+    redirect_to question_path(@question)
   end
-  
+
   def edit
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.find(params[:id])
+    @answer = Answer.find(params[:id])
   end
 
   def update
@@ -40,12 +40,12 @@ class AnswersController < ApplicationController
   end
 
   private
-    def answer_params
+  def answer_params
     params.require(:answer).permit(:content, :name, :question_id)
-    end
+  end
 
-    def login_requered
+  def login_requered
       # flash[:info] = 'ログインまたはサインアップをしてください。'
       redirect_to login_path unless current_user
-    end
+  end
 end

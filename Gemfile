@@ -74,3 +74,5 @@ gem 'kaminari', '~> 1.1.1'
 gem 'kaminari-bootstrap'
 gem 'slim-rails'
 gem 'html2slim'
+
+gem 'config'
