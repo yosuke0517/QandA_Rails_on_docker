@@ -1,27 +1,32 @@
 class AnswersController < ApplicationController
+  before_action :login_requered ,only: [:edit, :update, :destroy]
+
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = Answer.new
-      if @answer.update(answer_params)
-        redirect_to question_path(@question), notice: 'Success!'
-      else
-        redirect_to question_path(@question), alert: 'Invalid!'
-      end
+    @answer = Answer.new(answer_params)
+
+    if @answer.save
+      flash[:success] = '回答を投稿しました。'
+    else
+      flash[:danger] = '回答の投稿に失敗しました。'
+    end
+    redirect_to question_path(@question)
   end
-  
+
   def edit
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.find(params[:id])
+    @answer = Answer.find(params[:id])
   end
 
   def update
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     if @answer.update(answer_params)
-      redirect_to question_path(@question), notice: 'Success!'
+      flash[:success] = '回答の編集をしました。'
+      redirect_to question_path(@question)
     else
-      flash[:alert] = 'Invalid!'
+      flash[:danger] = '回答の編集に失敗しました。'
       render :edit
     end
   end
@@ -30,11 +35,17 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     @answer.destroy
-    redirect_to question_path(@question), notice: 'Deleted!'
+    flash[:info] = '回答を削除しました。'
+    redirect_to question_path(@question)
   end
 
   private
-    def answer_params
+  def answer_params
     params.require(:answer).permit(:content, :name, :question_id)
-    end
+  end
+
+  def login_requered
+      # flash[:info] = 'ログインまたはサインアップをしてください。'
+      redirect_to login_path unless current_user
+  end
 end

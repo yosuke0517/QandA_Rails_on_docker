@@ -1,0 +1,56 @@
+.row
+  .col-md-12
+    h2
+      = @question.title
+    div
+      |  質問内容: 
+      = @question.content
+    div
+      |  Name: 
+      = @question.name
+    hr
+    div
+      h3
+        | Answers
+      table.table.table-striped
+        - if @question.answers.any?
+          thead.thead-light
+            tr
+              td
+                | Answer
+              td
+                | Name
+              td
+                | Menu
+          tbody
+            - @question.answers.each do |answer|
+              tr
+                td
+                  = answer.content
+                td
+                  = answer.name
+                td
+                  |  
+                  = link_to '編集',edit_question_answer_path(@question, answer), class: 'btn btn-outline-success mr-3'
+                  |  
+                  = link_to '削除', question_answer_path(@question, answer), method: :delete, data:{ confirm: '本当に削除しますか？'}, class: 'btn btn-outline-danger mr-3'
+                  |  
+        - else
+          p
+            | No answer yet.
+    h3
+      | Post new answer.
+    = form_with model: [@question, @answer], local: true do |f|
+      = f.hidden_field :question_id, { value: @question.id}
+      .form-group
+        label
+          | Name
+        = f.text_field :name, class: 'form-control'
+      .form-group
+        label
+          | Content
+        = f.text_area :content, class: 'form-control'
+      .text-center
+        = f.submit "Post", class: 'btn btn-primary'
+  div
+    = link_to '> Home', root_path, class: 'btn btn-outline-primary mt-3'

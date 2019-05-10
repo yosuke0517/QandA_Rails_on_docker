@@ -1,0 +1,19 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
+  = link_to image_tag("logo.svg", alt: "Suketail"),'/', class: "logo"
+  button.navbar-toggler[type="button" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替"]
+    span.navbar-toggler-icon
+  #Navber.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+    form.form-inline.my-2.my-lg-0.mx-auto
+      input.form-control.mr-sm-2[type="search" placeholder="検索..まだ未実装です" aria-label="検索..."]
+      button.btn.btn-outline-light.my-2.my-sm-0[type="submit"]
+        | 検索
+    ul.navbar-nav
+      - if current_user
+        li.nav-item.active
+          = link_to "Logout", logout_path, method: :delete , class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
+      - else
+        li.nav-item.active
+          = link_to "Sign up", "/signup", class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
+        li.nav-item.active
+          = link_to "Login", "/login", class: "nav-link btn btn-outline-light mr-sm-2 my-2 my-sm-0"
