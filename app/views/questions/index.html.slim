@@ -2,22 +2,29 @@
   table.table.table-striped.table-condensed
     thead.thead-light
       tr
-        th[width="15%"]
+        th[width="10%"]
           | ID
-        th[width="55%"]
+        th[width="15%"]
+            | Author
+        th[width="50%"]
           | Title
-        th[width="30%"]
+        th[width="25%"]
           | Menuu
     tbody
       - @questions.each do |question|
         tr
-          td[width="15%"]
+          td[width="10%"]
             = question.id
-          td[width="55%"]
+          td[width="15%"]
+            = question.author
+          td[width="50%"]
             = link_to question.title, question_path(question)
-          td[width="30%"]
-            = link_to '編集', edit_question_path(question), class: 'btn btn-outline-success mr-3'
-            = link_to '削除', question_path(question), class: 'btn btn-outline-danger', method: :delete, data:{ confirm: '本当に削除しますか?' }
+          td[width="25%"]
+            - if current_user
+              - if current_user.id == question.user_id
+                = link_to '編集', edit_question_path(question), class: 'btn btn-outline-success mr-3'
+                = link_to '削除', question_path(question), class: 'btn btn-outline-danger', method: :delete, data: {confirm: '本当に削除しますか?'}
+
   = paginate @questions
 div
   = link_to '新規質問', new_question_path, class: 'btn btn-primary'

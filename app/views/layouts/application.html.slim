@@ -10,9 +10,9 @@ html
     = render 'layouts/shim'
   body
     = render 'layouts/header'
+    .mt-2
+      = render 'layouts/flash_messages'
     #main_container.container
-      .mt-2
-        = render 'layouts/flash_messages'
       .p-home.px-2.px-1.pt-4.pt-1
         = yield
     = render 'layouts/footer'

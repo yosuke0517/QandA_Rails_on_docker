@@ -2,7 +2,6 @@ class QuestionsController < ApplicationController
   #指定したactionの前に行う処理を指定する
   before_action :set_question ,only: [:edit, :update, :show, :destroy]
   before_action :login_requered ,only: [:edit, :update, :destroy, :new]
-  PER = 7
 
   def index
     # 更新が新しい順に並べる
@@ -19,6 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    #@question = Question.new(question_params.merge(user_id: current_user.id,author: current_user.name))
     @question = Question.new(question_params)
     if @question.save
       flash[:success] = '質問を投稿しました。'
@@ -55,7 +55,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:name, :title, :content)
+      params.require(:question).permit(:name, :title, :content, :user_id, :author)
     end
 
     def login_requered
