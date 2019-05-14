@@ -9,7 +9,7 @@
 
 20.times do |number|
   Question.create(id:"#{number+1}", name: 'Test name' + "#{number+1}",title: 'Test title'  + "#{number+1}",
-                  content: 'Test content'  + "#{number+1}",user_id: 4,author: 'sample')
+                  content: 'Test content'  + "#{number+1}",user_id: 1,author: 'sample')
 end
 
 
