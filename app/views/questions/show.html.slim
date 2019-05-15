@@ -17,7 +17,9 @@
           thead.thead-light
             tr
               td
-                | Answer
+                | AnswerContent
+              td
+                | Author
               td
                 | Name
               td
@@ -27,6 +29,8 @@
               tr
                 td
                   = answer.content
+                td
+                  = answer.author
                 td
                   = answer.name
                 td
@@ -42,6 +46,9 @@
       | Post new answer.
     = form_with model: [@question, @answer], local: true do |f|
       = f.hidden_field :question_id, { value: @question.id}
+      - if current_user
+        = f.hidden_field :user_id, {value: current_user.id}
+        = f.hidden_field :author, {value: current_user.name}
       .form-group
         label
           | Name

@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :login_requered ,only: [:edit, :update, :destroy]
+  before_action :login_requered ,only: [:edit, :update, :destroy, :create]
 
 
   def create
@@ -41,7 +41,7 @@ class AnswersController < ApplicationController
 
   private
   def answer_params
-    params.require(:answer).permit(:content, :name, :question_id)
+    params.require(:answer).permit(:content, :name, :question_id, :user_id, :author)
   end
 
   def login_requered
