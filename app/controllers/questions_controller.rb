@@ -9,8 +9,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = Answer.new
-
+    @answer = Answer.find_by(params[:question_id])
+    if @answer.nil?
+      @answer = Answer.new
+    end
   end
 
   def new
@@ -59,7 +61,7 @@ class QuestionsController < ApplicationController
     end
 
     def login_requered
-      # flash[:info] = 'ログインまたはサインアップをしてください。'
+      flash[:warning] = 'ログインまたはサインアップをしてください。'
       redirect_to login_path unless current_user
     end
 end
