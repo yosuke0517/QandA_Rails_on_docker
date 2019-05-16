@@ -9,10 +9,11 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = Answer.find_by(params[:question_id])
-    if @answer.nil?
-      @answer = Answer.new
-    end
+    # @answer = Answer.find_by(params[:question_id])
+    # if @answer.nil?
+    #   @answer = Answer.new
+    # end
+    @answer = Answer.new
   end
 
   def new
