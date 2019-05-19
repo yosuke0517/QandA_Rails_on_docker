@@ -27,7 +27,7 @@ class AnswersController < ApplicationController
       #該当のQuestionのupdated_atを更新する
       @question.touch
       flash[:success] = '回答の編集をしました。'
-      redirect_to question_path(@question)
+      redirect_to question_pathg(@question)
     else
       flash[:danger] = '回答の編集に失敗しました。'
       render :edit
@@ -48,7 +48,10 @@ class AnswersController < ApplicationController
   end
 
   def login_requered
-      # flash[:info] = 'ログインまたはサインアップをしてください。'
-      redirect_to login_path unless current_user
+    unless current_user
+      flash[:info] = 'ログインまたはサインアップをしてください。'
+      redirect_to login_path
+    end
+
   end
 end
