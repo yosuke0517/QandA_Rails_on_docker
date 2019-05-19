@@ -5,8 +5,9 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)
-
     if @answer.save
+      #該当のQuestionのupdated_atを更新する
+      @question.touch
       flash[:success] = '回答を投稿しました。'
     else
       flash[:danger] = '回答の投稿に失敗しました。'
@@ -23,6 +24,8 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     if @answer.update(answer_params)
+      #該当のQuestionのupdated_atを更新する
+      @question.touch
       flash[:success] = '回答の編集をしました。'
       redirect_to question_path(@question)
     else

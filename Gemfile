@@ -32,7 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+#gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,6 +49,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'solargraph', group: :development
+  gem 'pry-byebug', group: :development
 end
 
 group :test do
@@ -77,3 +78,5 @@ gem 'html2slim'
 
 gem 'config'
 gem 'rubocop'
+gem 'rails-i18n', '~> 5.1'
+gem 'rinku'
