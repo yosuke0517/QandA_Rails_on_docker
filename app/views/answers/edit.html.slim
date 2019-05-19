@@ -6,11 +6,11 @@ div
     .form-group
       .form-group
         label
-          | Name
-        = f.text_field :name, class: "form-control"
-      .form-group
-        label
           | Content
-        = f.text_area :content, class: "form-control"
+        = f.text_area :content, class: "form-control", id: 'editor'
       .text-center
         = f.submit "Update", class: "btn btn-primary"
+javascript:
+    CKEDITOR.replace('editor', {
+        height: 200,
+    });

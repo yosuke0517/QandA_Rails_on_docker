@@ -4,7 +4,7 @@
   .form-group
     label
       | Name
-    = f.text_area :name, class: "form-control"
+    = f.text_field :name, class: "form-control"
   .form-group
     label
       | Title
@@ -12,6 +12,10 @@
   .form-group
     label
       | 質問内容
-    = f.text_area :content, class: "form-control"
+    = f.text_area :content, class: "form-control",id: 'editor'
     .text-center
       = f.submit "Save", class: "btn btn-primary mt-3"
+javascript:
+    CKEDITOR.replace('editor', {
+        height: 200,
+    });

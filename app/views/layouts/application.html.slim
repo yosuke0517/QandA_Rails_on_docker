@@ -7,10 +7,12 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js'
+    = javascript_include_tag 'editor'
     = render 'layouts/shim'
   body
     = render 'layouts/header'
-    .mt-2
+    .mt-3
       = render 'layouts/flash_messages'
     #main_container.container
       .p-home.px-2.px-1.pt-4.pt-1
