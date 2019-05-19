@@ -10,6 +10,8 @@ div
         = f.text_area :content, class: "form-control", id: 'editor'
       .text-center
         = f.submit "Update", class: "btn btn-primary"
+div
+  = link_to '> Home', root_path, class: 'btn btn-outline-primary mb-3 ml-3'
 javascript:
     CKEDITOR.replace('editor', {
         height: 200,
