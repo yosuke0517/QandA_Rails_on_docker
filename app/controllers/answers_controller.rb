@@ -27,7 +27,7 @@ class AnswersController < ApplicationController
       #該当のQuestionのupdated_atを更新する
       @question.touch
       flash[:success] = '回答の編集をしました。'
-      redirect_to question_pathg(@question)
+      redirect_to question_path(@question)
     else
       flash[:danger] = '回答の編集に失敗しました。'
       render :edit
