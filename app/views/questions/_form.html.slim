@@ -3,16 +3,13 @@
   = f.hidden_field :author, { value: current_user.name}
   .form-group
     label
-      | Name
-    = f.text_field :name, class: "form-control"
-  .form-group
-    label
       | Title
     = f.text_field :title, class: "form-control"
   .form-group
     label
       | 質問内容
-    = f.text_area :content, class: "form-control",id: 'editor'
+    = f.text_area :content, class: "form-control",id:'editor'
+    / = f.text_area :content, class: "form-control"
     .text-center
       = f.submit "Save", class: "btn btn-primary mt-3"
 div
