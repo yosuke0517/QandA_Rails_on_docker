@@ -45,8 +45,7 @@
         = f.hidden_field :user_id, {value: current_user.id}
         = f.hidden_field :author, {value: current_user.name}
       .form-group
-        label
-          | Content
+        = f.label :質問内容
         = f.text_area :content, class: 'form-control',id: 'editor'
       .text-center.mb-3
         = f.submit "Post", class: 'btn btn-primary'

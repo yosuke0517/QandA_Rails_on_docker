@@ -87,6 +87,14 @@ p {
   color: darksalmon;
 }
 
-.ck {
-  height: 400px;
+//.ck {
+//  height: 400px;
+//}
+
+.ck-editor__editable {
+  min-height: 400px;
+}
+
+#editor {
+  visible: false
 }

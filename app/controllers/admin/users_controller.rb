@@ -14,6 +14,10 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    if params[:back].present?
+      render :new
+      return
+    end
 
     if @user.save
       flash[:success] = "ユーザー「#{@user.name}」を登録しました。"
@@ -47,6 +51,13 @@ class Admin::UsersController < ApplicationController
     @user.destroy
     flash[:indo] = "ユーザー「#{@user.name}」を更新しました。"
     redirect_to admin_users_url
+  end
+
+  def confirm_new
+    # 入力されたユーザを作成しバリデーションを確認
+    @user = User.new(user_params)
+    # バリデーション失敗時は新規登録画面へ
+    render :new unless @user.valid?
   end
 
 

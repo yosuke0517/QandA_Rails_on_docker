@@ -5,7 +5,17 @@ class QuestionsController < ApplicationController
 
   def index
     # 更新が新しい順に並べる
-    @questions = Question.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
+    # application_controllerにてset_searchメソッドで@questionsを拾って来ている
+    # 「||=」 ... 変数@questionsの値がnilなら代入するが、nilでなければ代入しない (@current_userの値を変えない)
+    # @questions ||= Question.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
+
+    # if params[:q].present?
+    #   render json:  @questions.select("title").map { |e| e.title  }.to_json
+    # end
+    # ajaxで送られた場合にはjsonを変えす
+    unless params[:q].blank?
+      render json: @questions.select("title").map { |e| e.title  }.to_json
+    end
   end
 
   def show
@@ -17,9 +27,15 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    #@question = Question.new(question_params.merge(user_id: current_user.id,author: current_user.name))
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
+
+    if params[:back].present?
+     render :new
+      return
+    end
     if @question.save
+      #ログ出力
+      logger.debug "question: #{@question.attributes.inspect}"
       flash[:success] = '質問を投稿しました。'
       redirect_to root_path
     else
@@ -47,6 +63,12 @@ class QuestionsController < ApplicationController
     redirect_to root_path
   end
 
+  def confirm_new
+    @question = current_user.questions.new(question_params)
+    #質問の検証で問題がある場合はエラーメッセージと共に新規登録画面へ戻す
+    render :new unless @question.valid?
+  end
+
   private
 
     def set_question
@@ -63,4 +85,5 @@ class QuestionsController < ApplicationController
         redirect_to login_path
       end
     end
+
 end

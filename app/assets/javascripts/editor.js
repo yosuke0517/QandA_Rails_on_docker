@@ -8,6 +8,6 @@ ClassicEditor
     .catch( error => {
         console.error( error );
     } );
-    config.width = 500;
-    config.height = 400;
+    width:500;
+    height:100;
 });

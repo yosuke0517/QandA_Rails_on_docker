@@ -5,8 +5,7 @@ div
   = form_with model:[@question, @answer], local: true do |f|
     .form-group
       .form-group
-        label
-          | Content
+        = f.label :content
         = f.text_area :content, class: "form-control", id: 'editor'
       .text-center
         = f.submit "Update", class: "btn btn-primary"

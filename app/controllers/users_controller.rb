@@ -15,6 +15,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    # 戻るボタンの時new画面へ遷移する
+    if params[:back].present?
+      render :new
+      return
+    end
+
     if @user.save
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
@@ -22,6 +28,12 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
+  end
+
+  def confirm_new
+    # 入力されたユーザを作成しバリデーションを確認
+    @user = User.new(user_params)
+    render :new unless @user.valid?
   end
 
   private
