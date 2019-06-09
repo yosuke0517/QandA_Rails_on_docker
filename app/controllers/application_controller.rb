@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user
-    before_action :set_search
-
+    #before_action :set_search
     private
 
     def current_user
@@ -11,13 +10,10 @@ class ApplicationController < ActionController::Base
     end
 
     def set_search
+        # viewの検索窓からの入力値（今回はタイトル（後述））をキーに検索オブジェクトを作成
         @search = Question.ransack(params[:q])
-        @questions = @search.result.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
-
-        # ajaxで送られた場合にはjsonを変えす
-        unless params[:q].blank?
-            render json: @questions.select("title").map { |e| e.title  }.to_json
-        end
+        # resultメソッドで結果を得られる（ページングを指定している）
+        @questions_count = @search.result.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
     end
 
 end

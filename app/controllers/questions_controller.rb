@@ -4,18 +4,10 @@ class QuestionsController < ApplicationController
   before_action :login_requered ,only: [:edit, :update, :destroy, :new]
 
   def index
-    # 更新が新しい順に並べる
-    # application_controllerにてset_searchメソッドで@questionsを拾って来ている
-    # 「||=」 ... 変数@questionsの値がnilなら代入するが、nilでなければ代入しない (@current_userの値を変えない)
-    # @questions ||= Question.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
-
-    # if params[:q].present?
-    #   render json:  @questions.select("title").map { |e| e.title  }.to_json
-    # end
-    # ajaxで送られた場合にはjsonを変えす
-    unless params[:q].blank?
-      render json: @questions.select("title").map { |e| e.title  }.to_json
-    end
+    # viewの検索窓からの入力値（今回はタイトル（後述））をキーに検索オブジェクトを作成
+    @search ||= Question.ransack(params[:q])
+    # resultメソッドで結果を得られる（ページングを指定している）
+    @questions ||= @search.result.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
   end
 
   def show
@@ -71,19 +63,19 @@ class QuestionsController < ApplicationController
 
   private
 
-    def set_question
+  def set_question
     @question = Question.find(params[:id])
-    end
+  end
 
-    def question_params
+  def question_params
       params.require(:question).permit(:name, :title, :content, :user_id, :author)
-    end
+  end
 
-    def login_requered
+  def login_requered
       unless current_user
         flash[:warning] = 'ログインまたはサインアップをしてください。'
         redirect_to login_path
       end
-    end
+  end
 
 end

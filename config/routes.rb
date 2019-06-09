@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
   root 'questions#index'
+  #get 'questions/search', to: 'questions#search', as: 'search_questions_count'
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
   get 'answers/edit'

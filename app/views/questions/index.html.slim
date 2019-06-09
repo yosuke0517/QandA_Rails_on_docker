@@ -1,20 +1,7 @@
 .row
-  = search_form_for @search, remote: true, id: "search_form", url: questions_path do |f|
+  = search_form_for @search, remote: false, id: "search_form",class: 'form-inline mb-2', url: questions_path do |f|
     = f.text_field :title_cont, placeholder: Settings.service.ransack_placeholder, class: 'form-control col mr-sm-2'
     = f.submit class: 'btn btn-success my-2 my-sm-0'
-    coffee:
-      $ ->
-        $("#search_form").keyup ->
-          $("#search_form").find("input[type='submit']").click()
-        $('#search_form').on 'ajax:success', (event, results) ->
-          $select = $("#search_check")
-          $trs = $select.find("tr")
-          $trs.each ->
-            value = ($(this).find("td").first().text())
-            if value in results
-              $(this).show()
-            else
-              $(this).hide()
   table.table.table-striped.table-condensed
     thead.thead-light
       tr
