@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
     # viewの検索窓からの入力値（今回はタイトル（後述））をキーに検索オブジェクトを作成
     @search ||= Question.ransack(params[:q])
     # resultメソッドで結果を得られる（ページングを指定している）
-    @questions ||= @search.result.page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
+    @questions ||= @search.result(distinct: true).page(params[:page]).per(Settings.service.PER).order('updated_at DESC')
   end
 
   def show

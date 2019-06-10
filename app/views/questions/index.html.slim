@@ -1,18 +1,14 @@
 .row
   = search_form_for @search, remote: false, id: "search_form",class: 'form-inline mb-2', url: questions_path do |f|
-    = f.text_field :title_cont, placeholder: Settings.service.ransack_placeholder, class: 'form-control col mr-sm-2'
+    = f.text_field :title_cont, placeholder: Settings.service.ransack_placeholder, class: 'form-control mr-sm-2'
     = f.submit class: 'btn btn-success my-2 my-sm-0'
   table.table.table-striped.table-condensed
     thead.thead-light
       tr
-        th[width="10%"]
-          | ID
-        th[width="15%"]
-          | Author
-        th[width="50%"]
-          | Title
-        th[width="25%"]
-          | Menuu
+        th#table_id ID
+        th#table_author 作成者
+        th#table_title title
+        th#table_menu MENU
     tbody#search_check
       - @questions.each do |question|
         tr

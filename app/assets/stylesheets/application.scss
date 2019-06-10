@@ -98,3 +98,23 @@ p {
 #editor {
   visible: false
 }
+
+::placeholder {
+  font-size: 0.95em;
+}
+
+#table_id {
+  width: 10%;
+}
+
+#table_author {
+  width: 15%;
+}
+
+#table_title {
+  width: 50%;
+}
+
+#table_menu {
+  width: 25%;
+}
