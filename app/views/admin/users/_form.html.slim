@@ -17,5 +17,8 @@
   .form-group
       = f.label :password_confirmation, 'パスワード（確認）'
       = f.password_field :password_confirmation, class: "form-control"
+  .form-group
+    = f.label :image
+    = f.file_field :image, class: "form-control"
   .text-center
       = f.submit "登録する", class: "btn btn-primary .mt-1"

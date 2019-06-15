@@ -84,3 +84,7 @@ gem 'rubocop'
 gem 'rails-i18n', '~> 5.1'
 gem 'rinku'
 gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'mini_magick', '~> 4.8'
+
+#aws
+gem "aws-sdk-s3", require: false

@@ -4,9 +4,7 @@
       h3.card-title
         = @user.name
       .card-body
-        |  <img class="card-img-top" src="
-        = gravatar_url(@user, { size: 500 })
-        | " alt=""> 
+        = image_tag @user.image if @user.image.attached?
   .col-xs-8
     ul.nav.nav-tabs
       li.nav-item

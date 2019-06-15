@@ -11,6 +11,8 @@ ja:
         email: メールアドレス
         admin: 管理者
         password: パスワード
+        password_confirm: パスワード（確認用）
+        image: 画像
       question:
         title: タイトル
         name: 名前

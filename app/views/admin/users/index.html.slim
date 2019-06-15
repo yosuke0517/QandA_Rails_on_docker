@@ -5,10 +5,9 @@ h1 ユーザ一覧
     - @users.each do |user|
       li
         .media
-          |  <img class="mr-3" src="
-          = gravatar_url(user, {size: 50 })
-          | %" alt="" >
-          = link_to '編集', edit_admin_user_path(user), class: 'btn btn-outline-success mr-3'
+          - if user.image.attached?
+            = image_tag user.image.variant(combine_options:{resize:"160x160^",crop:"160x160+0+0",gravity: :center}).processed
+          = link_to '編集', edit_admin_user_path(user), class: 'btn btn-outline-success mr-3 mt-8'
           = link_to '削除', [:admin, user],method: :delete, data: {confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？"},class: 'btn btn btn-outline-danger'
         .media-body
           div.mb-4
