@@ -65,6 +65,8 @@ end
 
 group :production do
   gem 'pg', '~> 0.18.4'
+  #aws
+  gem "aws-sdk-s3", require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -85,6 +87,3 @@ gem 'rails-i18n', '~> 5.1'
 gem 'rinku'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'mini_magick', '~> 4.8'
-
-#aws
-gem "aws-sdk-s3", require: false
